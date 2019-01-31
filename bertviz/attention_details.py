@@ -95,9 +95,11 @@ def _get_attention_details(tokens_a, tokens_b, query_vectors, key_vectors, atts)
     key_vectors_dict = defaultdict(list)
     query_vectors_dict = defaultdict(list)
     atts_dict = defaultdict(list)
+    
+    tokens_b += ['<pad>', '<pad>', '<pad>']
 
     slice_a = slice(0, len(tokens_a))  # Positions corresponding to sentence A in input
-    slice_b = slice(len(tokens_a), len(tokens_a) + len(tokens_b)+3)  # Position corresponding to sentence B in input
+    slice_b = slice(len(tokens_a), len(tokens_a) + len(tokens_b))  # Position corresponding to sentence B in input
     num_layers = len(query_vectors)
     for layer in range(num_layers):
         # Process queries and keys
