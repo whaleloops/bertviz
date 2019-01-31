@@ -25,7 +25,7 @@ class AttentionDetailsData:
         tokens_a = self.tokenizer.tokenize(sentence_a)
         tokens_b = self.tokenizer.tokenize(sentence_b)
         tokens_a_delim = ['[CLS]'] + tokens_a + ['[SEP]']
-        tokens_b_delim = tokens_b + ['[SEP]']
+        tokens_b_delim = tokens_b + ['[SEP]', '<PAD>', '<PAD>', '<PAD>']
         token_ids = self.tokenizer.convert_tokens_to_ids(tokens_a_delim + tokens_b_delim)
         tokens_tensor = torch.tensor([token_ids])
         token_type_tensor = torch.LongTensor([[0] * len(tokens_a_delim) + [1] * len(tokens_b_delim)])
@@ -96,7 +96,6 @@ def _get_attention_details(tokens_a, tokens_b, query_vectors, key_vectors, atts)
     query_vectors_dict = defaultdict(list)
     atts_dict = defaultdict(list)
     
-    tokens_b += ['<pad>', '<pad>', '<pad>']
 
     slice_a = slice(0, len(tokens_a))  # Positions corresponding to sentence A in input
     slice_b = slice(len(tokens_a), len(tokens_a) + len(tokens_b))  # Position corresponding to sentence B in input
