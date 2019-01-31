@@ -19,7 +19,7 @@ class AttentionDetailsData:
         query_tensor = torch.stack([attn_data['query_layer'] for attn_data in attn_data_list])
         key_tensor = torch.stack([attn_data['key_layer'] for attn_data in attn_data_list])
         attn_tensor = torch.stack([attn_data['attn_probs'] for attn_data in attn_data_list])
-        return tokens_a, tokens_b, query_tensor.data.numpy(), key_tensor.data.numpy(), attn_tensor.data.numpy()
+        return tokens_tensor, tokens_a, tokens_b, query_tensor.data.numpy(), key_tensor.data.numpy(), attn_tensor.data.numpy()
 
     def _get_inputs(self, sentence_a, sentence_b):
         tokens_a = self.tokenizer.tokenize(sentence_a)
