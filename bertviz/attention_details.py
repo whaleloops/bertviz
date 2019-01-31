@@ -34,7 +34,7 @@ class AttentionDetailsData:
         token_type_tensor = torch.LongTensor([[0] * len(tokens_a_delim) + [1] * len(tokens_b_delim)])
         return tokens_tensor, token_type_tensor, tokens_a_delim, tokens_b_delim
 
-     def _get_inputs(self, sentence_a, sentence_b):
+    def _get_inputs(self, sentence_a, sentence_b):
         tokens_a = self.tokenizer.tokenize(sentence_a)
         tokens_b = self.tokenizer.tokenize(sentence_b)
         tokens_a_delim = ['[CLS]'] + tokens_a + ['[SEP]']
