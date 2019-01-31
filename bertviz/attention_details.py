@@ -15,9 +15,9 @@ class AttentionDetailsData:
 
     def get_data(self, sentence_a, sentence_b, withpad=False):
         if withpad:
-            tokens_tensor, token_type_tensor, tokens_a, tokens_b = self._get_inputs(sentence_a, sentence_b)
-        else:
             tokens_tensor, token_type_tensor, tokens_a, tokens_b = self._get_inputs_withpad(sentence_a, sentence_b)
+        else:
+            tokens_tensor, token_type_tensor, tokens_a, tokens_b = self._get_inputs(sentence_a, sentence_b)
         _, _, attn_data_list = self.model(tokens_tensor, token_type_ids=token_type_tensor)
         query_tensor = torch.stack([attn_data['query_layer'] for attn_data in attn_data_list])
         key_tensor = torch.stack([attn_data['key_layer'] for attn_data in attn_data_list])
